@@ -1,0 +1,33 @@
+Arguments: 
+  D:\Node\node.exe C:\Users\Alaksion\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add `ash
+
+PATH: 
+  C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Python27\;C:\Python27\Scripts;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\Node\;D:\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;D:\Go\bin;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\ProgramData\chocolatey\bin;C:\Program Files\OpenJDK\openjdk-8u262-b10\bin;C:\Users\Alaksion\AppData\Android\Sdk\platform-tools;C:\Users\Alaksion\AppData\Local\Android\Sdk\emulator;C:\Users\Alaksion\AppData\Local\Android\Sdk\tools;C:\Users\Alaksion\AppData\Local\Android\Sdk\tools\bin;C:\Users\Alaksion\AppData\Local\Android\Sdk\platform-tools;D:\Microsoft VS Code\bin;C:\Users\Alaksion\AppData\Roaming\npm;C:\Users\Alaksion\AppData\Local\Microsoft\WindowsApps;C:\Users\Alaksion\go\bin;D:\Java\IntelliJ IDEA Community Edition 2020.2.1\bin;C:\Program Files\dotnet\;;D:\Microsoft VS Code\bin;C:\Users\Alaksion\AppData\Roaming\npm;C:\Users\Alaksion\AppData\Local\Microsoft\WindowsApps;C:\Users\Alaksion\go\bin;D:\Java\IntelliJ IDEA Community Edition 2020.2.1\bin;
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.18.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  TypeError [ERR_UNESCAPED_CHARACTERS]: Request path contains unescaped characters
+      at new ClientRequest (_http_client.js:148:13)
+      at Object.request (https.js:314:10)
+      at Request.module.exports.Request.start (C:\Users\Alaksion\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141310:32)
+      at Request.module.exports.Request.end (C:\Users\Alaksion\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:142069:10)
+      at end (C:\Users\Alaksion\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141123:14)
+      at Immediate._onImmediate (C:\Users\Alaksion\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141137:7)
+      at processImmediate (internal/timers.js:456:21)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

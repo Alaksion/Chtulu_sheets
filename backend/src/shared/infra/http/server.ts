@@ -1,4 +1,5 @@
 import express from 'express';
+import '@shared/container';
 
 const app = express();
 const port = 8080;

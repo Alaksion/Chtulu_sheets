@@ -1,7 +1,9 @@
 import { inject, injectable } from 'tsyringe';
-import IUserRepository from '../repositories/IUserRepository';
+import AppError from '@shared/Errors/AppError';
+import IUserRepository from '@modules/user/repositories/IUserRepository';
 import IPasswordHashProvider from '../providers/PasswordHashProvider/models/IPasswordHashProvider';
 import User from '../infra/typeorm/entities/User';
+import '../providers/PasswordHashProvider/index';
 
 interface IRequest {
   username: string;
@@ -19,10 +21,10 @@ class CreateUserService {
   ) {}
 
   public async execute({ username, password, email }: IRequest): Promise<User> {
-    const validateMail = this.userRepository.findByEmail(email);
+    const validateMail = await this.userRepository.findByEmail(email);
 
     if (validateMail) {
-      throw new Error('Email já está em uso');
+      throw new AppError('Email já está em uso', 429);
     }
     const hashPassword = await this.hashProvider.generateHash(password);
     const newUser = await this.userRepository.create({

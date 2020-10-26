@@ -1,7 +1,7 @@
-import User from '@modules/user/infra/typeorm/entities/User';
-import IUserRepository from '@modules/user/repositories/IUserRepository';
-import IPasswordHashProvider from '@modules/user/providers/PasswordHashProvider/models/IPasswordHashProvider';
 import { inject, injectable } from 'tsyringe';
+import IUserRepository from '../repositories/IUserRepository';
+import IPasswordHashProvider from '../providers/PasswordHashProvider/models/IPasswordHashProvider';
+import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
   username: string;

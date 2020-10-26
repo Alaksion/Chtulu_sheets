@@ -1,4 +1,4 @@
-import IPasswordHashProvider from '@modules/user/providers/PasswordHashProvider/models/IPasswordHashProvider';
+import IPasswordHashProvider from '../models/IPasswordHashProvider';
 
 class FakeHashProvider implements IPasswordHashProvider {
   public async generateHash(payload: string): Promise<string> {

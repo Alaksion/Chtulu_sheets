@@ -5,11 +5,13 @@ import '../typeorm/index';
 import '@shared/container/index';
 import { errors } from 'celebrate';
 import AppError from '@shared/Errors/AppError';
+import UploadConfig from '@config/UploadConfig';
 import appRoutes from './routes/index';
 
 const app = express();
 const port = 8080;
 app.use(express.json());
+app.use('/files', express.static(UploadConfig.directory));
 app.use(appRoutes);
 app.use(errors());
 

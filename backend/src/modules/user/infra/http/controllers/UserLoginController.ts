@@ -1,6 +1,7 @@
 import AuthenticateUserService from '@modules/user/services/AuthenticateUserService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 class LoginController {
   public async Login(req: Request, res: Response): Promise<Response> {
@@ -10,7 +11,7 @@ class LoginController {
       email,
       password,
     });
-    return res.json({ user, token });
+    return res.json({ user: classToClass(user), token });
   }
 }
 

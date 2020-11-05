@@ -27,6 +27,8 @@
       "no-console":"off",
       "no-useless-constructor": "off",
       "class-methods-use-this": "off",
+      "@typescript-eslint/ban-types": "off",
+      "no-useless-return": "off",
       "import/extensions": [
         "error",
         "ignorePackages",

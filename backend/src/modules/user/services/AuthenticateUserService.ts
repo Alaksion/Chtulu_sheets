@@ -29,7 +29,7 @@ class AuthenticateUserService {
   public async execute({ email, password }: Request): Promise<Response> {
     const verifyEmail = await this.UserRepository.findByEmail(email);
     if (!verifyEmail) {
-      throw new AppError('Invalid Credentials', 422);
+      throw new AppError('Credenciais inválidas', 401);
     }
     const verifypassword = await this.hashProvider.compareHash(
       password,
@@ -37,7 +37,7 @@ class AuthenticateUserService {
     );
 
     if (!verifypassword) {
-      throw new AppError('Invalid Credentials', 422);
+      throw new AppError('Credenciais inválidas', 401);
     }
 
     const token = sign({}, AuthConfig.secret, {

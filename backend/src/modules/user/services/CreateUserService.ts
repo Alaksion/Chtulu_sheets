@@ -24,7 +24,7 @@ class CreateUserService {
     const validateMail = await this.userRepository.findByEmail(email);
 
     if (validateMail) {
-      throw new AppError('Email já está em uso', 422);
+      throw new AppError('Email já está em uso', 400);
     }
     const hashPassword = await this.hashProvider.generateHash(password);
     const newUser = await this.userRepository.create({

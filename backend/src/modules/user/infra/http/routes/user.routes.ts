@@ -23,6 +23,18 @@ userRouter.post(
   userController.create,
 );
 
+userRouter.put(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      username: Joi.string().required(),
+      email: Joi.string().email().required(),
+    },
+  }),
+  AssureAuthenticated,
+  userController.update,
+);
+
 userRouter.patch(
   '/avatar',
   AssureAuthenticated,

@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import AuthenticateUserService from '@modules/user/services/AuthenticateUserService';
 import FakeUserRepository from '@modules/user/repositories/fakes/FakeUserRepository';
 import FakeHashProvider from '@modules/user/providers/PasswordHashProvider/fakes/FakePasswordHashProvider';
-import AppError from '@shared/Errors/AppError';
+import UnauthorizedError from '@shared/Errors/UnauthorizedError';
 
 let authenticateUserService: AuthenticateUserService;
 let fakeUserRepository: FakeUserRepository;
@@ -39,7 +39,7 @@ describe('Testes de autenticação', () => {
         email: 'emailquenaoexiste@nexiste.com.br',
         password: 'senhaErrada',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(UnauthorizedError);
   });
 
   it('Nao Deve autenticar usuario com o email certo porem senha errada', async () => {
@@ -54,6 +54,6 @@ describe('Testes de autenticação', () => {
         email: user.email,
         password: 'senhaErrada',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(UnauthorizedError);
   });
 });

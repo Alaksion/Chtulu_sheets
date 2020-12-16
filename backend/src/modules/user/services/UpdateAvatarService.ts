@@ -1,5 +1,5 @@
 import IStorageProvider from '@shared/container/Providers/StorageProvider/models/IStorageProvider';
-import AppError from '@shared/Errors/AppError';
+import NotFoundError from '@shared/Errors/NotFoundError';
 import { inject, injectable } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import IUserRepository from '../repositories/IUserRepository';
@@ -22,7 +22,7 @@ class CreateAvatarService {
     const user = await this.userRepository.findById(userId);
 
     if (!user) {
-      throw new AppError('User not found');
+      throw new NotFoundError('Usuário não encontrado');
     }
 
     if (user.userAvatar) {

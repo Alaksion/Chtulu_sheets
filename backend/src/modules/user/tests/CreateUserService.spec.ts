@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import AppError from '@shared/Errors/AppError';
+import RegraDeNegocioError from '@shared/Errors/RegraDeNegocioError';
 import CreateUserSerivce from '../services/CreateUserService';
 import FakeUserRepository from '../repositories/fakes/FakeUserRepository';
 import FakeHashProvider from '../providers/PasswordHashProvider/fakes/FakePasswordHashProvider';
@@ -33,6 +33,6 @@ describe('Testes de criar usuario', () => {
     await createUserService.execute({ email, password, username });
     await expect(
       createUserService.execute({ email, password, username }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(RegraDeNegocioError);
   });
 });

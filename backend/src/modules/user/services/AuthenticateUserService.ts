@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken';
 import User from '@modules/user/infra/typeorm/entities/User';
 import AuthConfig from '@config/AuthConfig';
-import AppError from '@shared/Errors/AppError';
+import UnauthorizedError from '@shared/Errors/UnauthorizedError';
 import IuserRepository from '@modules/user/repositories/IUserRepository';
 import { inject, injectable } from 'tsyringe';
 import IPasswordHashProvider from '../providers/PasswordHashProvider/models/IPasswordHashProvider';
@@ -29,7 +29,7 @@ class AuthenticateUserService {
   public async execute({ email, password }: Request): Promise<Response> {
     const verifyEmail = await this.UserRepository.findByEmail(email);
     if (!verifyEmail) {
-      throw new AppError('Credenciais inválidas', 401);
+      throw new UnauthorizedError('Credenciais inválidas');
     }
     const verifypassword = await this.hashProvider.compareHash(
       password,
@@ -37,7 +37,7 @@ class AuthenticateUserService {
     );
 
     if (!verifypassword) {
-      throw new AppError('Credenciais inválidas', 401);
+      throw new UnauthorizedError('Credenciais inválidas');
     }
 
     const token = sign({}, AuthConfig.secret, {

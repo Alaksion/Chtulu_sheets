@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import FakeStorageProvider from '@shared/container/Providers/StorageProvider/Fakes/FakeStorageProvider';
-import AppError from '@shared/Errors/AppError';
+import NotFoundError from '@shared/Errors/NotFoundError';
 import UpdateAvatarService from '../services/UpdateAvatarService';
 import FakeUserRepository from '../repositories/fakes/FakeUserRepository';
 
@@ -33,17 +33,6 @@ describe('Testes de avatar', () => {
     expect(usuarioAtualizado.userAvatar).toBe(arquivoEsperado);
   });
 
-  it('Não deve ser possível alterar o avatar de um usuario que nao existe', async () => {
-    const userId = 'NaoExiste';
-    const arquivoEsperado = 'ArquivoEsperado';
-    await expect(
-      updateAvatarService.execute({
-        userId,
-        filename: arquivoEsperado,
-      }),
-    ).rejects.toBeInstanceOf(AppError);
-  });
-
   it('Deve ser possível alterar o avatar de um usuario', async () => {
     const primeiroAvatar = 'PrimeiroAvatar';
     const segundoAvatar = 'SegundoAvatar';
@@ -65,5 +54,16 @@ describe('Testes de avatar', () => {
     });
 
     expect(deleteFileFunction).toHaveBeenCalledWith('PrimeiroAvatar');
+  });
+
+  it('Não deve ser possível alterar o avatar de um usuario que nao existe', async () => {
+    const userId = 'NaoExiste';
+    const arquivoEsperado = 'ArquivoEsperado';
+    await expect(
+      updateAvatarService.execute({
+        userId,
+        filename: arquivoEsperado,
+      }),
+    ).rejects.toBeInstanceOf(NotFoundError);
   });
 });

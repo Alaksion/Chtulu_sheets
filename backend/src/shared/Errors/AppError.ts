@@ -1,6 +1,11 @@
-import codes from '@config/StatusCode';
+import codes from '@enums/StatusCode';
 
-export default class AppError {
+interface IAppError {
+  message: string;
+  statusCode: number;
+}
+
+export default abstract class AppError {
   public message: string;
 
   public statusCode: number;
@@ -9,7 +14,7 @@ export default class AppError {
 
   public timestamp: Date;
 
-  constructor(message: string, statusCode = 400) {
+  constructor({ message, statusCode }: IAppError) {
     const statusName = codes[statusCode]
       .split(' ')
       .map(w => {

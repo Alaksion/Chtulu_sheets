@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import AppError from '@shared/Errors/AppError';
+import RegraDeNegocioError from '@shared/Errors/RegraDeNegocioError';
 import IUserRepository from '@modules/user/repositories/IUserRepository';
 import IPasswordHashProvider from '../providers/PasswordHashProvider/models/IPasswordHashProvider';
 import User from '../infra/typeorm/entities/User';
@@ -24,7 +24,7 @@ class CreateUserService {
     const validateMail = await this.userRepository.findByEmail(email);
 
     if (validateMail) {
-      throw new AppError('Email já está em uso', 400);
+      throw new RegraDeNegocioError('Email já está em uso');
     }
     const hashPassword = await this.hashProvider.generateHash(password);
     const newUser = await this.userRepository.create({

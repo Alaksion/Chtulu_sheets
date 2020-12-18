@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
-import AppError from '@shared/Errors/AppError';
 import AuthConfig from '@config/AuthConfig';
+import UnauthorizedError from '@shared/Errors/UnauthorizedError';
 
 interface TokenPayLoad {
   iat: number;
@@ -16,9 +16,8 @@ export default function AssureAuthenticated(
 ): void {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    throw new AppError(
+    throw new UnauthorizedError(
       'Auth token must be provided to access this resource',
-      401,
     );
   }
   const [, token] = authHeader.split(' ');
@@ -30,6 +29,6 @@ export default function AssureAuthenticated(
     };
     return next();
   } catch {
-    throw new AppError('Invalid JWT TOKEN', 401);
+    throw new UnauthorizedError('Invalid JWT TOKEN');
   }
 }

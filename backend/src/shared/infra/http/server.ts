@@ -4,12 +4,14 @@ import 'express-async-errors';
 import '../typeorm/index';
 import '@shared/container/index';
 import { errors } from 'celebrate';
+import cors from 'cors';
 import AppError from '@shared/Errors/AppError';
 import UploadConfig from '@config/UploadConfig';
 import appRoutes from './routes/index';
 
 const app = express();
 const port = 8080;
+app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(UploadConfig.directory));
 app.use(appRoutes);

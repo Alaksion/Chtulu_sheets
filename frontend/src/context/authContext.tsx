@@ -20,9 +20,11 @@ interface AuthContextData {
 const authContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
+  const appStorage = '@ctulu';
+
   const [data, setData] = useState<AuthState>(() => {
-    const fetchToken = localStorage.getItem('@ctulu:token');
-    const fetchUser = localStorage.getItem('@ctulu:user');
+    const fetchToken = localStorage.getItem(`${appStorage}:token`);
+    const fetchUser = localStorage.getItem(`${appStorage}:user`);
 
     if (fetchToken && fetchUser) {
       return { token: fetchToken, user: JSON.parse(fetchUser) };
@@ -30,8 +32,10 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
 
-  const setUserData = useCallback(loginData => {
-    console.log(loginData);
+  const setUserData = useCallback(({ token, user }: AuthState) => {
+    localStorage.setItem(`${appStorage}:token`, token);
+    localStorage.setItem(`${appStorage}:user`, JSON.stringify(user));
+    setData({ token, user });
   }, []);
 
   return (

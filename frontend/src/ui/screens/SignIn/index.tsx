@@ -7,7 +7,7 @@ import CustomButton from 'ui/components/CustomButton';
 import * as Yup from 'yup';
 import { Container, Content, SideBackground } from './styles';
 import CustomInput from '../../components/CustomInput';
-import useAuth from '../../../hooks/auth';
+import useAuth from '../../../hooks/useLogin';
 import useCustomToasts from '../../../hooks/toasts';
 import ValidationErrors from '../../../utils/ValidationErrors';
 

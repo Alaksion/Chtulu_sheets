@@ -1,4 +1,5 @@
 import api from '../services/api';
+import { useAuth } from '../context/authContext';
 
 interface ILoginData {
   email: string;
@@ -10,7 +11,9 @@ interface ILoginResponse {
   token: string;
 }
 
-const useAuth = () => {
+const useLogin = () => {
+  const { setUserData } = useAuth();
+
   async function login({
     email,
     password,
@@ -19,12 +22,15 @@ const useAuth = () => {
       email,
       password,
     });
-    console.log(response);
     api.defaults.headers.Authorization = response.data.token;
+    setUserData({
+      token: response.data.token,
+      user: response.data.user,
+    });
     return response.data;
   }
 
   return { login };
 };
 
-export default useAuth;
+export default useLogin;

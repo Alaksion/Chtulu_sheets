@@ -10,7 +10,7 @@ export default abstract class AppError {
 
   public statusCode: number;
 
-  public name: String;
+  public name: string;
 
   public timestamp: Date;
 

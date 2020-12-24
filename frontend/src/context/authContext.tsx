@@ -15,6 +15,7 @@ interface AuthState {
 interface AuthContextData {
   user: User;
   setUserData(loginData: AuthState): void;
+  resetUserData(): void;
 }
 
 const authContext = createContext<AuthContextData>({} as AuthContextData);
@@ -38,8 +39,14 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
+  const resetUserData = useCallback(() => {
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <authContext.Provider value={{ user: data.user, setUserData }}>
+    <authContext.Provider
+      value={{ user: data.user, setUserData, resetUserData }}
+    >
       {children}
     </authContext.Provider>
   );

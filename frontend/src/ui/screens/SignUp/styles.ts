@@ -54,11 +54,11 @@ export const Content = styled.div`
 
     &:hover {
       opacity: 0.7;
-      transform: translateX(10px);
+      transform: translateX(-10px);
     }
 
     svg {
-      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 `;

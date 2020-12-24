@@ -31,4 +31,5 @@ export const appColors = {
   green: '#02d361',
   error_red: '#c53030',
   grey: '#666360',
+  appOrange: '#FF9000',
 };

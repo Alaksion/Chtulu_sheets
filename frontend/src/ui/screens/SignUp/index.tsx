@@ -1,20 +1,19 @@
 import React, { useRef, useCallback, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
-import { Link, useHistory } from 'react-router-dom';
+import { FiMail, FiLock, FiChevronLeft, FiUser } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import CustomButton from 'ui/components/CustomButton';
 import * as Yup from 'yup';
 import { Container, Content, SideBackground } from './styles';
 import CustomInput from '../../components/CustomInput';
-import useLogin from '../../../hooks/useLogin';
+import useCreateAccount from '../../../hooks/useCreateAccount';
 import ValidationErrors from '../../../utils/ValidationErrors';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [buttonLoading, setButtonLoading] = useState(false);
-  const { login } = useLogin();
-  const navigation = useHistory();
+  const { apiCall } = useCreateAccount();
 
   const handleSubmit = useCallback(
     async data => {
@@ -25,7 +24,12 @@ const SignIn: React.FC = () => {
           email: Yup.string()
             .email('E-mail inválido')
             .required('Campo e-mail é obrigatório'),
-          password: Yup.string().required('Campo senha é obrigatório'),
+          password: Yup.string()
+            .required('Campo senha é obrigatório')
+            .min(10, 'Senha deve ter no mínimo 10 caracteres'),
+          username: Yup.string().required(
+            'Campo nome de usuário é obrigatório',
+          ),
         });
 
         await schema.validate(data, {
@@ -35,25 +39,34 @@ const SignIn: React.FC = () => {
         const erros = ValidationErrors(err);
 
         formRef.current?.setErrors(erros);
-        setButtonLoading(false);
         return;
       }
 
       setButtonLoading(true);
 
-      await login({ email: data.email, password: data.password });
-      setButtonLoading(false);
-      navigation.push('/dashboard');
+      await apiCall({
+        email: data.email,
+        password: data.password,
+        username: data.username,
+      });
     },
-    [login, navigation],
+    [apiCall],
   );
 
   return (
     <Container>
+      <SideBackground />
+
       <Content>
-        <h1>Faça seu Login</h1>
+        <h1>Crie sua conta</h1>
 
         <Form ref={formRef} onSubmit={handleSubmit}>
+          <CustomInput
+            name="username"
+            icon={FiUser}
+            placeholder="Digite seu nome de usuário"
+          />
+
           <CustomInput
             name="email"
             icon={FiMail}
@@ -67,18 +80,20 @@ const SignIn: React.FC = () => {
             type="password"
           />
 
-          <CustomButton texto="Entrar" loading={buttonLoading} type="submit" />
+          <CustomButton
+            texto="Criar conta"
+            loading={buttonLoading}
+            type="submit"
+          />
         </Form>
 
-        <Link to="/signup">
-          Criar uma conta
-          <FiLogIn size={25} />
+        <Link to="/">
+          <FiChevronLeft size={25} />
+          Voltar ao login
         </Link>
       </Content>
-
-      <SideBackground />
     </Container>
   );
 };
 
-export default SignIn;
+export default SignUp;

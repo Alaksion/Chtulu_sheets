@@ -10,11 +10,12 @@ export const appDefaults = createGlobalStyle`
   }
 
   body{
-    background-color: #312E38;
+    background-color: black;
   }
 
   button{
     cursor: pointer;
+    border: 0;
 
     &:focus{
       outline: 0
@@ -31,5 +32,6 @@ export const appColors = {
   green: '#02d361',
   error_red: '#c53030',
   grey: '#666360',
+  darkGrey: '#202024',
   appOrange: '#FF9000',
 };

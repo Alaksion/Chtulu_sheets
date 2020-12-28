@@ -7,7 +7,9 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: #202024;
+  background-color: ${appColors.darkGrey};
+  position: absolute;
+  top: 0;
 `;
 
 export const Content = styled.div`

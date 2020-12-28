@@ -14,7 +14,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   height: 100%;
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   margin: auto;
@@ -26,11 +26,11 @@ export const HeaderLogoContent = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 
-  span {
-    color: white;
-    font-size: 22px;
-    font-weight: 700;
+  img {
+    max-width: 80%;
+    height: 40px;
   }
 `;
 

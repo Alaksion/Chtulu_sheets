@@ -10,6 +10,7 @@ import {
   HeaderProfileImageButton,
 } from './styles';
 import { useAuth } from '../../../context/authContext';
+import HeaderLogo from '../../../assets/Images/HeaderLogo.png';
 
 interface IHeaderProps {
   isGoBackButton?: boolean;
@@ -32,7 +33,8 @@ const Header: React.FC<IHeaderProps> = ({ isGoBackButton }) => {
     <Container>
       <Content>
         <HeaderLogoContent>
-          <span>APP LOGO</span>
+          <img src={HeaderLogo} alt="Logotipo da aplicação" />
+
           <>
             {isGoBackButton && (
               <NavigateBackButton onClick={navigateBack}>
